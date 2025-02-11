@@ -1,21 +1,14 @@
 from django.db import models
 from .choices import TIPO, TIPOS_REGISTRO
-from django.core.validators import MinLengthValidator
-from .validadores import validacion_numeros, validar_telefono, validar_cedula
+from django.core.validators import MinLengthValidator, EmailValidator
+from .validadores import validacion_numeros, validar_telefono, validar_cedula, validar_email
 
 class Empleados(models.Model):
-    cedula = models.CharField(
-        max_length=10, 
-        primary_key=True, 
-        validators=[validar_cedula]
-    )
+    cedula = models.CharField(max_length=10, primary_key=True, validators=[validar_cedula])
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    telefono = models.CharField(
-        max_length=15, 
-        validators=[validar_telefono]
-    )
+    email = models.EmailField(validators=[EmailValidator(), validar_email],unique=True)
+    telefono = models.CharField(max_length=15, validators=[validar_telefono])
     tipo = models.CharField(max_length=50, choices=TIPO)
 
     class Meta:

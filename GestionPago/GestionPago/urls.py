@@ -26,7 +26,7 @@ router.register(r'salarios', SalariosViewSet)
 router.register(r'registros', RegistrosViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Ruta para el panel de administración
-    path('api/', include(router.urls)),  # Rutas de la API con DRF
+    path('admin/', admin.site.urls), 
+    path('api/', include(router.urls)),  
 ]
 
